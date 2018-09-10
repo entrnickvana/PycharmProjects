@@ -9,7 +9,8 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # connect the client
 # client.connect((target, port))
-client.connect(('127.0.0.1', 1256))
+# client.connect(('127.0.0.1', 1256))
+client.connect(('192.168.1.129', 1256))
 
 print('connected:\n')
 
