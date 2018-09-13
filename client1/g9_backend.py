@@ -26,8 +26,8 @@ class g9Client():
         # connect the client
         # client.connect((target, port))
         client.connect(('127.0.0.1', 1256))
-        #client.connect(('192.168.1.129', 1256))
-        
+        # client.connect(('192.168.1.129', 1256))
+        # client.connect(('10.56.30.250', 1256))
         print('connected:\n')
         
         # ------------------- FOR WEB ADDRESSES  ----------------------------------------
@@ -40,7 +40,7 @@ class g9Client():
         
         print(server_msg)
         
-        msg = '&&&& CLIENT BITCH &&&&&&&&\n'
+        msg = '&&&& CLIENT &&&&&&&&\n'
         client.send(msg.encode())        
         # send some data (in this case a HTTP GET request)
 
