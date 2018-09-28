@@ -1,9 +1,14 @@
 import socket
 import threading
+import RPi.GPIO as GPIO
+import time
+
 
 bind_ip = '127.0.0.1'
 # bind_ip = '192.168.1.129'
 bind_port = 1256
+
+my_init_PWM()
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((bind_ip, bind_port))
@@ -15,12 +20,25 @@ def handle_client_connection(client_socket):
     print('entered thread\n')
     client_socket.sendall('-------------------------------------------\n +++ WELCOME TO G9 SERVER +++\n--------------------------------'.encode())
 
-    request = client_socket.recv(1024)
+    request = client_socket.recv(3).decode("utf-8")
+    print(request)
+    dial1 = 0
+    dial2 = 0
+    dial3 = 0
 
     while request != 'stop'.encode():
-        print('\r')
-        print(request)
-        request = client_socket.recv(1024)
+        # request = client_socket.recv(3).decode("utf-8)")
+        dial1 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial2 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial3 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        # print(request)
+
+        dc = dial1
+        pwm = GPIO.PWM(18, 100)
+        pwm.start(dc)
+
+
+        print('dial1: {},    dial2: {},   dial3: {} \n'.format(dial1, dial2, dial3))
 
     client_socket.close()
 
@@ -33,6 +51,22 @@ while True:
     )
     client_handler.start()
     print('past new thread\n')
+
+
+def my_init_PWM():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    GPIO.setup(18, GPIO.OUT)
+    
+
+
+
+
+
+
+
+
+
 
 
     

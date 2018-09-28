@@ -40,15 +40,27 @@ class g9Client():
         
         print(server_msg)
         
-        msg = '&&&& CLIENT &&&&&&&&\n'
-        client.send(msg.encode())        
+        # msg = '&&&& CLIENT &&&&&&&&\n'
+        # client.send(msg.encode())        
         # send some data (in this case a HTTP GET request)
+
+        byte1 = (0).to_bytes(1, byteorder = 'big')
+        byte2 = (0).to_bytes(1, byteorder = 'big')
+        byte3 = (0).to_bytes(1, byteorder = 'big')
 
         while True:
     
-            msg2 = str(ui_arg.verticalSlider.value()) + str(ui_arg.verticalSlider_2.value()) + str(ui_arg.verticalSlider_3.value())
+            msg2 = str(ui_arg.verticalSlider.value()) + str(ui_arg.verticalSlider_2.value()) + str(ui_arg.verticalSlider_3.value()) + '\r'
     
-            client.send(msg2.encode())
+            byte1 = ui_arg.verticalSlider.value().to_bytes(1, byteorder = 'big')
+            byte2 = ui_arg.verticalSlider_2.value().to_bytes(1, byteorder = 'big')
+            byte3 = ui_arg.verticalSlider_3.value().to_bytes(1, byteorder = 'big')
+
+            client.send(byte1)
+            client.send(byte2)
+            client.send(byte3)
+
+            print(msg2 + '\r')
         
         # receive the response data (4096 is recommended buffer size)
         # response = client.recv(4096)
