@@ -43,24 +43,30 @@ class g9Client():
         
         print(server_msg)
         
-        msg = '&&&& CLIENT &&&&&&&&\n'
-        client.send(msg.encode())        
+        # msg = '&&&& CLIENT &&&&&&&&\n'
+        # client.send(msg.encode())        
         # send some data (in this case a HTTP GET request)
 
-        byte0 = (0).to_bytes(1, byteorder = 'big')
-        byte1 = (0).to_bytes(1, byteorder = 'big')
-        byte2 = (0).to_bytes(1, byteorder = 'big')
-        byte3 = (0).to_bytes(1, byteorder = 'big')
-        byte4 = (0).to_bytes(1, byteorder = 'big')
-        byte5 = (0).to_bytes(1, byteorder = 'big')
-        byte6 = (0).to_bytes(1, byteorder = 'big')
+        byte0 = (0).to_bytes(1, byteorder = 'big') # 0  
+        byte1 = (0).to_bytes(1, byteorder = 'big') # 1
+        byte2 = (0).to_bytes(1, byteorder = 'big') # 2
+        byte3 = (0).to_bytes(1, byteorder = 'big') # 3
+        byte4 = (0).to_bytes(1, byteorder = 'big') # 4
+        byte5 = (0).to_bytes(1, byteorder = 'big') # 5
+        byte6 = (0).to_bytes(1, byteorder = 'big') # 6
+        byte7 = (0).to_bytes(1, byteorder = 'big') # 7
+        byte8 = (0).to_bytes(1, byteorder = 'big') # 8
+        byte9 = (0).to_bytes(1, byteorder = 'big') # 9
+        byte10 = (0).to_bytes(1, byteorder = 'big') # 10
+        byte11 = (0).to_bytes(1, byteorder = 'big') # 11
+        byte12 = (0).to_bytes(1, byteorder = 'big') # 12
 
 
         while True:
     
-            time.sleep(.5)
+            time.sleep(1)
 
-            msg2 = str(ui_arg.lo_slid.value()) + str(ui_arg.mid_slid.value()) + str(ui_arg.hi_slid.value()) + str(ui_arg.treb_slid.value()) + str(ui_arg.lo_freq_slid.value()) + str(ui_arg.mid_freq_slid.value()) + str(ui_arg.hi_freq_slid.value()) + '\r'
+            msg2 = str(ui_arg.input_slid.value()) + '\t' + str(ui_arg.output_slid.value()) + '\t' + str(ui_arg.lo_slid.value()) + '\t' + str(ui_arg.mid_slid.value()) + '\t' + str(ui_arg.hi_slid.value()) + '\t' + str(ui_arg.treb_slid.value()) + '\t' + str(ui_arg.lo_freq_slid.value())  + '\t' +  str(ui_arg.mid_freq_slid.value()) + '\t' + str(ui_arg.hi_freq_slid.value())  + '\t' + str(ui_arg.cmp_slid1.value())  + '\t' +  str(ui_arg.cmp_slid2.value())  + '\t' +  str(ui_arg.rev_slid1.value())  + '\t' +  str(ui_arg.rev_slid2.value())
     
             #byte1 = ui_arg.verticalSlider.value().to_bytes(1, byteorder = 'big')
             #byte2 = ui_arg.verticalSlider_2.value().to_bytes(1, byteorder = 'big')
@@ -75,6 +81,10 @@ class g9Client():
             byte6 = ui_arg.lo_freq_slid.value().to_bytes(1, byteorder = 'big')
             byte7 = ui_arg.mid_freq_slid.value().to_bytes(1, byteorder = 'big')
             byte8 = ui_arg.hi_freq_slid.value().to_bytes(1, byteorder = 'big')
+            byte9 = ui_arg.cmp_slid1.value().to_bytes(1, byteorder = 'big')
+            byte10 = ui_arg.cmp_slid2.value().to_bytes(1, byteorder = 'big')
+            byte11 = ui_arg.rev_slid1.value().to_bytes(1, byteorder = 'big')
+            byte12 = ui_arg.rev_slid2.value().to_bytes(1, byteorder = 'big')
 
 
             client.send(byte0)
@@ -83,8 +93,14 @@ class g9Client():
             client.send(byte3)
             client.send(byte4)
             client.send(byte5)
+            client.send(byte6)
             client.send(byte7)
             client.send(byte8)
+            client.send(byte9)
+            client.send(byte10)
+            client.send(byte11)
+            client.send(byte12)            
+
 
             print(msg2 + '\r')
         
@@ -1078,6 +1094,7 @@ class Ui_TabWidget(object):
         outpt = i
         print("OUTPUT: " + str(outpt))    
 
+
 ##
     @pyqtSlot(int, name='on_input_slid_2_sliderMoved')
     def on_input_slid_2_sliderMoved(self, i):    
@@ -1089,6 +1106,7 @@ class Ui_TabWidget(object):
         outpt = i
         print("INPUT: " + str(outpt))    
 ##
+
 
     @pyqtSlot(int, name='on_cmp_slid1_sliderMoved')
     def on_cmp_slid1_sliderMoved(self, i):    

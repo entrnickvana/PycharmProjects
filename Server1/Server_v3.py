@@ -20,37 +20,47 @@ def handle_client_connection(client_socket):
     print('entered thread\n')
     client_socket.sendall('\n +++ WELCOME TO G9 SERVER +++\n'.encode())
 
-    request = client_socket.recv(7).decode("utf-8")
-    print(request)
-    dial0 = 0
-    dial1 = 0
-    dial2 = 0
-    dial3 = 0
-    dial4 = 0
-    dial5 = 0
-    dial6 = 0
-    dial7 = 0
-    dial8 = 0
-    dial9 = 0
-    dial10 = 0
-    dial11 = 0
-    dial12 = 0
+    # request = client_socket.recv(13).decode("utf-8")
+    # print(request)
+    # dial0 = 0
+    # dial1 = 0
+    # dial2 = 0
+    # dial3 = 0
+    # dial4 = 0
+    # dial5 = 0
+    # dial6 = 0
+    # dial7 = 0
+    # dial8 = 0
+    # dial9 = 0
+    # dial10 = 0
+    # dial11 = 0
+    # dial12 = 0
+
+    request = 'go'.encode()
 
     while request != 'stop'.encode():
         #request = client_socket.recv(7).decode("utf-8)")
-        dial0 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial1 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial2 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
-        dial3 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial4 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial5 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
-        dial6 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial7 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial8 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial9 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
-        dial10 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial11 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial12 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+
+        #msg_str = client_socket.recv(13)
+        #print('---MESSAGE---\n\n')
+        #print(msg_str)
+
+        dial0   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial1   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial2   = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        dial3   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial4   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial5   = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        dial6   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial7   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial8   = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial9   = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        dial10  = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial11  = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial12  = int.from_bytes(client_socket.recv(1), byteorder = 'big')     
+
+
+
 
         # print(request)
 
