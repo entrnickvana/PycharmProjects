@@ -10,6 +10,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
 import socket
 from threading import Thread
+import time
+
 
 def client_thread(g9_c, ui_arg):
     g9_c.start_client(ui_arg)
@@ -25,7 +27,8 @@ class g9Client():
         
         # connect the client
         # client.connect((target, port))
-        client.connect(('127.0.0.1', 1256))
+        # client.connect(('127.0.0.1', 1256))
+        client.connect(('10.56.31.170', 1256))
         # client.connect(('192.168.1.129', 1256))
         # client.connect(('10.56.30.250', 1256))
         print('connected:\n')
@@ -50,11 +53,14 @@ class g9Client():
 
         while True:
     
+            time.sleep(.5)
+
             msg2 = str(ui_arg.verticalSlider.value()) + str(ui_arg.verticalSlider_2.value()) + str(ui_arg.verticalSlider_3.value()) + '\r'
     
             byte1 = ui_arg.verticalSlider.value().to_bytes(1, byteorder = 'big')
             byte2 = ui_arg.verticalSlider_2.value().to_bytes(1, byteorder = 'big')
             byte3 = ui_arg.verticalSlider_3.value().to_bytes(1, byteorder = 'big')
+
 
             client.send(byte1)
             client.send(byte2)

@@ -13,6 +13,8 @@ from threading import Thread
 import time
 
 
+# '10.56.31.207'
+
 def client_thread(g9_c, ui_arg):
     g9_c.start_client(ui_arg)
 
@@ -27,7 +29,8 @@ class g9Client():
         
         # connect the client
         # client.connect((target, port))
-        client.connect(('127.0.0.1', 1256))
+        client.connect(('10.56.31.207', 1256))
+        #client.connect(('127.0.0.1', 1256))
         # client.connect(('10.56.31.170', 1256))
         # client.connect(('192.168.1.129', 1256))
         # client.connect(('10.56.30.250', 1256))

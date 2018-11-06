@@ -2,6 +2,7 @@ import socket
 import threading
 # import RPi.GPIO as GPIO
 import time
+import i2cFunction.py
 
 
 bind_ip = '127.0.0.1'
@@ -19,6 +20,10 @@ print ('Listening on {}:{}'.format(bind_ip, bind_port))
 def handle_client_connection(client_socket):
     print('entered thread\n')
     client_socket.sendall('\n +++ WELCOME TO G9 SERVER +++\n'.encode())
+
+    i2cFunction i2c_control()
+
+
 
     # request = client_socket.recv(13).decode("utf-8")
     # print(request)
@@ -57,10 +62,9 @@ def handle_client_connection(client_socket):
         dial9   = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
         dial10  = int.from_bytes(client_socket.recv(1), byteorder = 'big')
         dial11  = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial12  = int.from_bytes(client_socket.recv(1), byteorder = 'big')     
+        dial12  = int.from_bytes(client_socket.recv(1), byteorder = 'big')    
 
-
-
+        i2c_control.send_EQ_low_freq(i2c_control, dial2) 
 
         # print(request)
 

@@ -8,7 +8,7 @@ bind_ip = '127.0.0.1'
 # bind_ip = '192.168.1.129'
 bind_port = 1256
 
-my_init_PWM()
+# my_init_PWM()
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((bind_ip, bind_port))
@@ -18,27 +18,43 @@ print ('Listening on {}:{}'.format(bind_ip, bind_port))
 
 def handle_client_connection(client_socket):
     print('entered thread\n')
-    client_socket.sendall('-------------------------------------------\n +++ WELCOME TO G9 SERVER +++\n--------------------------------'.encode())
+    client_socket.sendall('\n +++ WELCOME TO G9 SERVER +++\n'.encode())
 
     request = client_socket.recv(3).decode("utf-8")
     print(request)
+    dial0 = 0
     dial1 = 0
     dial2 = 0
     dial3 = 0
+    dial4 = 0
+    dial5 = 0
+    dial6 = 0
 
     while request != 'stop'.encode():
         # request = client_socket.recv(3).decode("utf-8)")
+        dial0 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
         dial1 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial2 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
-        dial3 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        dial2 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        dial3 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial4 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+        dial5 = int.from_bytes(client_socket.recv(1), byteorder = 'big')                
+        dial6 = int.from_bytes(client_socket.recv(1), byteorder = 'big')
+
         # print(request)
 
-        dc = dial1
-        pwm = GPIO.PWM(18, 100)
-        pwm.start(dc)
+        # dc = dial1
+        # pwm = GPIO.PWM(18, 100)
+        # pwm.start(dc)
 
-
-        print('dial1: {},    dial2: {},   dial3: {} \n'.format(dial1, dial2, dial3))
+        print('',
+        'dial0: {}',
+        'dial1: {}',
+        'dial2: {}',
+        'dial3: {}',
+        'dial4: {}',
+        'dial5: {}',
+        'dial6: {}',
+        ' \n'.format(dial0, dial1, dial2, dial3, dial4, dial5, dial6 ))
 
     client_socket.close()
 
